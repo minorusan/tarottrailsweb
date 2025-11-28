@@ -892,53 +892,8 @@
       });
     });
 
-    // Carousel auto-scroll
-    const carousel = document.getElementById('carousel');
-    let scrollAmount = 0;
-    let autoScrollInterval;
-
-    function autoScroll() {
-      if (carousel) {
-        const items = carousel.querySelectorAll('.carousel-item');
-        let currentIndex = 0;
-
-        // Find which item is currently centered
-        for (let i = 0; i < items.length; i++) {
-          const rect = items[i].getBoundingClientRect();
-          const carouselRect = carousel.getBoundingClientRect();
-          if (rect.left >= carouselRect.left && rect.left < carouselRect.right) {
-            currentIndex = i;
-            break;
-          }
-        }
-
-        // Move to next item
-        currentIndex = (currentIndex + 1) % items.length;
-        const nextItem = items[currentIndex];
-
-        if (nextItem) {
-          nextItem.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'center'
-          });
-        }
-      }
-    }
-
-    // Auto-scroll every 4 seconds
-    autoScrollInterval = setInterval(autoScroll, 4000);
-
-    // Pause auto-scroll on hover
-    if (carousel) {
-      carousel.addEventListener('mouseenter', () => {
-        clearInterval(autoScrollInterval);
-      });
-
-      carousel.addEventListener('mouseleave', () => {
-        autoScrollInterval = setInterval(autoScroll, 4000);
-      });
-    }
+    // Carousel - Manual scroll only (autoscroll disabled)
+    // Users can swipe/scroll through screenshots at their own pace
   </script>
 </body>
 </html>
