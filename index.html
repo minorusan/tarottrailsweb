@@ -3,97 +3,942 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tarot Trails Thoth</title>
+  <meta name="description" content="Mantica - Your daily companion for tarot wisdom, cosmic guidance, and spiritual growth. Explore tarot cards, planetary hours, and 200+ spirit guides.">
+  <title>Mantica - Daily Tarot & Cosmic Guidance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
-    body {
-      background-color: #e1f0ee;
-      font-family: Arial, sans-serif;
+    * {
       margin: 0;
       padding: 0;
-      color: #333;
-      text-align: center;
+      box-sizing: border-box;
     }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
+
+    :root {
+      --primary-teal: #6B9B9E;
+      --dark-teal: #4A7477;
+      --light-sage: #E8F3F1;
+      --cream: #F5F1E8;
+      --gold: #D4AF37;
+      --deep-purple: #4A3B5C;
+      --text-dark: #2C3E50;
+      --text-light: #F8F9FA;
     }
-    .icon {
-      width: 120px;
-      height: 120px;
-      margin: 0 auto 20px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-    .description {
-      font-size: 18px;
+
+    body {
+      font-family: 'Lato', sans-serif;
+      color: var(--text-dark);
       line-height: 1.6;
+      overflow-x: hidden;
+      background: var(--cream);
     }
-    .footer {
-      margin-top: 40px;
-      font-size: 14px;
+
+    h1, h2, h3, h4 {
+      font-family: 'Cinzel', serif;
+      font-weight: 600;
     }
-    .footer a {
-      color: #007b7f;
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 2rem;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Cinzel', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark-teal);
       text-decoration: none;
     }
-    .footer a:hover {
-      text-decoration: underline;
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
     }
-    .business-info {
-      margin-top: 10px;
-      color: #666;
+
+    .nav-links a {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 400;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--dark-teal);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--light-sage) 0%, var(--cream) 50%, #E8DED2 100%);
+      position: relative;
+      overflow: hidden;
+      padding: 6rem 2rem 4rem;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(107, 155, 158, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .app-icon {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 2rem;
+      border-radius: 30px;
+      box-shadow:
+        0 20px 60px rgba(107, 155, 158, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+      animation: float 3s ease-in-out infinite;
+      display: block;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      color: var(--deep-purple);
+      margin-bottom: 1.5rem;
+      letter-spacing: 2px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--dark-teal);
+      margin-bottom: 2rem;
+      font-weight: 300;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-description {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      max-width: 700px;
+      margin: 0 auto 3rem;
+      line-height: 1.8;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 1.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 4rem;
+    }
+
+    .btn {
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary-teal) 0%, var(--dark-teal) 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(107, 155, 158, 0.3);
+    }
+
+    .btn-secondary {
+      background: white;
+      color: var(--dark-teal);
+      border: 2px solid var(--primary-teal);
+    }
+
+    .btn-secondary:hover {
+      background: var(--light-sage);
+      transform: translateY(-3px);
+    }
+
+    /* Screenshot Carousel */
+    .carousel-section {
+      padding: 5rem 2rem;
+      background: white;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      color: var(--deep-purple);
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      margin-bottom: 4rem;
+      opacity: 0.8;
+    }
+
+    .carousel-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+      padding: 2rem 0;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 2rem;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 1rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-item {
+      flex: 0 0 auto;
+      scroll-snap-align: center;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .carousel-item.single {
+      width: 300px;
+    }
+
+    .carousel-item.double {
+      width: 620px;
+    }
+
+    .carousel-item:hover {
+      transform: scale(1.02);
+    }
+
+    .screenshot-wrapper {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      border-radius: 25px;
+      background: white;
+    }
+
+    .screenshot-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .screenshot-pair {
+      display: flex;
+      gap: 0;
+    }
+
+    .screenshot-pair img {
+      width: 50%;
+      flex: 1;
+    }
+
+    .screenshot-caption {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--primary-teal);
+      opacity: 0.3;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 2rem;
+      background: linear-gradient(180deg, white 0%, var(--light-sage) 100%);
+    }
+
+    /* Data & Privacy Section */
+    .data-privacy {
+      padding: 6rem 2rem;
+      background: white;
+    }
+
+    .privacy-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2.5rem;
+      margin-top: 3rem;
+    }
+
+    .privacy-card {
+      background: var(--cream);
+      padding: 2.5rem;
+      border-radius: 20px;
+      border: 2px solid var(--light-sage);
+      transition: all 0.3s ease;
+    }
+
+    .privacy-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(107, 155, 158, 0.15);
+      border-color: var(--primary-teal);
+    }
+
+    .privacy-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+
+    .privacy-card h3 {
+      font-size: 1.5rem;
+      color: var(--deep-purple);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .privacy-card p {
+      margin-bottom: 1rem;
+      color: var(--text-dark);
+    }
+
+    .privacy-card ul {
+      list-style: none;
+      padding: 0;
+      margin: 1.5rem 0;
+    }
+
+    .privacy-card li {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      line-height: 1.6;
+    }
+
+    .privacy-card li:before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: var(--primary-teal);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .privacy-card strong {
+      color: var(--dark-teal);
+      font-weight: 600;
+    }
+
+    .privacy-cta {
+      text-align: center;
+      margin-top: 3rem;
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--light-sage), var(--cream));
+      border-radius: 15px;
+      font-size: 1.1rem;
+    }
+
+    .privacy-link {
+      color: var(--dark-teal);
+      font-weight: 700;
+      text-decoration: none;
+      border-bottom: 2px solid var(--primary-teal);
+      transition: all 0.3s ease;
+    }
+
+    .privacy-link:hover {
+      color: var(--deep-purple);
+      border-bottom-color: var(--deep-purple);
+    }
+
+    .features-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 3rem;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s ease;
+      border: 1px solid rgba(107, 155, 158, 0.1);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(107, 155, 158, 0.15);
+    }
+
+    .feature-icon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      color: var(--deep-purple);
+      margin-bottom: 1rem;
+    }
+
+    .feature-card p {
+      color: var(--text-dark);
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    /* Download Section */
+    .download-section {
+      padding: 6rem 2rem;
+      background: linear-gradient(135deg, var(--deep-purple) 0%, var(--dark-teal) 100%);
+      color: white;
+      text-align: center;
+    }
+
+    .download-section h2 {
+      font-size: clamp(2.5rem, 5vw, 3.5rem);
+      margin-bottom: 1.5rem;
+      color: white;
+    }
+
+    .download-section p {
+      font-size: 1.2rem;
+      margin-bottom: 3rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .store-buttons {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 2rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid white;
+      border-radius: 15px;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .store-btn:hover {
+      background: white;
+      color: var(--deep-purple);
+      transform: translateY(-5px);
+    }
+
+    .store-icon {
+      font-size: 2.5rem;
+    }
+
+    .store-text {
+      text-align: left;
+    }
+
+    .store-text small {
+      display: block;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    .store-text strong {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--deep-purple);
+      color: white;
+      padding: 3rem 2rem 1.5rem;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 3rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h3 {
+      color: var(--gold);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .footer-section a:hover {
+      color: var(--gold);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        padding: 1rem;
+      }
+
+      .nav-links {
+        gap: 1rem;
+        font-size: 0.9rem;
+      }
+
+      .hero {
+        padding: 5rem 1rem 3rem;
+      }
+
+      .carousel-item.single {
+        width: 250px;
+      }
+
+      .carousel-item.double {
+        width: 520px;
+      }
+
+      .app-icon {
+        width: 100px;
+        height: 100px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .store-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.8s ease-out;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <img src="icon.png" alt="App Icon" class="icon" />
-    <div class="description">
-      <!-- Paste your App Store description here -->
-      <p><em>Unlock the Power of Tarot with Tarot Trails Thoth<br>
+  <!-- Navigation -->
+  <nav>
+    <a href="/" class="logo">Mantica</a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#data-privacy">Privacy</a></li>
+      <li><a href="#download">Download</a></li>
+    </ul>
+  </nav>
 
-Step into the mystical world of the Thoth Tarot and explore your inner journey through daily insights, intuitive journaling, and now — custom Tarot spreads.
-
-<br>Whether you're a seasoned reader or just beginning, Tarot Trails Thoth offers a beautifully designed, spiritually empowering toolset to deepen your practice and help you reflect on life's questions.
-
-<br><br>What’s New
-You can now create and track your own spreads — choose from templates or build your own layouts. Name them, add notes, and return later to reflect and continue your readings.
-
-<br><br>Features You'll Love
-<br><br>Daily Card Draws
-<br>Start your day with a card from the Thoth Tarot deck, complete with rich interpretations grounded in esoteric tradition.
-
-<br><br>Personal Journaling
-<br>Capture thoughts, emotions, and experiences. Your journal becomes a mirror of your spiritual growth over time.
-
-<br><br>Insightful Analytics
-<br>Explore visual patterns in your draws, moods, and reflections. Understand what keeps showing up and why it matters.
-
-<br><br>Custom Tarot Spreads
-<br>Design or select Tarot spreads for deeper readings. Add cards, notes, and insights — all saved and searchable for future reflection.
-
-<br><br>Emotion Tagging & Notes
-<br>Log your emotional state and track how it aligns with the cards you draw. Add multi-day notes to expand your reflection.
-
-<br><br>A Tool for Self-Discovery
-<br>Whether you seek guidance, self-awareness, or spiritual discipline, Tarot Trails Thoth is a daily companion for mindful growth.
-
-<br><br>Why Choose Tarot Trails Thoth?
-<br>This app goes beyond simple card pulls. It’s a thoughtfully crafted ritual space that combines the mystical depth of the Thoth Tarot with modern features for journaling, analysis, and growth.
-
-<br><br>Begin Your Tarot Journey Today
-<br>Download Tarot Trails Thoth and start exploring your inner world — one card, one insight, one spread at a time.</em></p>
-    </div>
-    <div class="footer">
-      <a href="https://docs.google.com/document/d/1Loc4CknDAU8tMq5J8rx8YYCYoyeROqYy/edit#heading=h.gjdgxs">Privacy Policy</a>
-      <div class="business-info">
-        <p>Developed by Klyment Shchukin / ФОП ЩУКІН К. М.</p>
-        <p>D-U-N-S No:53-840-7715 </p>
-        <p>Poltava, Ukraine</p>
-        <p>Contact: klymentshchukin@gmail.com</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content fade-in-up">
+      <img src="icon.png" alt="Mantica App Icon" class="app-icon">
+      <h1>Mantica</h1>
+      <p class="hero-subtitle">Your Daily Companion for Spiritual Growth</p>
+      <p class="hero-description">
+        Unlock the wisdom of tarot, align with cosmic rhythms, and explore 200+ spiritual guides.
+        Mantica combines ancient divination with modern insights to guide your inner journey.
+      </p>
+      <div class="cta-buttons">
+        <a href="#download" class="btn btn-primary">Download Now</a>
+        <a href="#features" class="btn btn-secondary">Learn More</a>
       </div>
     </div>
-  </div>
+  </section>
+
+  <!-- Screenshot Carousel -->
+  <section class="carousel-section">
+    <h2 class="section-title">Experience the Magic</h2>
+    <p class="section-subtitle">Beautifully designed for mindful exploration</p>
+
+    <div class="carousel-container">
+      <div class="carousel" id="carousel">
+        <div class="carousel-item double">
+          <div class="screenshot-wrapper">
+            <div class="screenshot-pair">
+              <img src="screens/1-2_left.png" alt="Daily Tarot Journey">
+              <img src="screens/1-2_right.png" alt="Track Your Emotions">
+            </div>
+          </div>
+          <p class="screenshot-caption">Daily Journey & Emotion Tracking</p>
+        </div>
+        <div class="carousel-item single">
+          <div class="screenshot-wrapper">
+            <img src="screens/3.png" alt="Planetary Hours Wheel">
+          </div>
+          <p class="screenshot-caption">Align with Cosmic Rhythms</p>
+        </div>
+        <div class="carousel-item single">
+          <div class="screenshot-wrapper">
+            <img src="screens/4.png" alt="Cosmic Insights">
+          </div>
+          <p class="screenshot-caption">Cosmic Insights</p>
+        </div>
+        <div class="carousel-item double">
+          <div class="screenshot-wrapper">
+            <div class="screenshot-pair">
+              <img src="screens/5-6_left.png" alt="Spirit Guides Database">
+              <img src="screens/5-6_right.png" alt="Detailed Guide Information">
+            </div>
+          </div>
+          <p class="screenshot-caption">200+ Spirit Guides Database</p>
+        </div>
+        <div class="carousel-item double">
+          <div class="screenshot-wrapper">
+            <div class="screenshot-pair">
+              <img src="screens/7-8_left.png" alt="Custom Tarot Spreads">
+              <img src="screens/7-8_right.png" alt="Spread Builder">
+            </div>
+          </div>
+          <p class="screenshot-caption">Custom Tarot Spreads</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <h2 class="section-title">Everything You Need for Spiritual Growth</h2>
+    <p class="section-subtitle">A complete toolkit for your metaphysical practice</p>
+
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon">🌙</span>
+        <h3>Daily Tarot Draws</h3>
+        <p>Start each day with profound insights from the Thoth Tarot deck. Track your draws, emotions, and reflections over time to uncover patterns in your spiritual journey.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">✨</span>
+        <h3>Custom Tarot Spreads</h3>
+        <p>Design your own spreads or choose from classic layouts like Celtic Cross. Add cards, notes, and insights - all saved for future reflection and growth.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🪐</span>
+        <h3>Planetary Hours</h3>
+        <p>Align your practices with cosmic rhythms. Real-time planetary hour calculations help you choose the perfect timing for your spiritual work and manifestations.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">👁️</span>
+        <h3>200+ Spirit Guides</h3>
+        <p>Explore a comprehensive database of spiritual entities, demons, angels, and guides. Each entry includes planetary correspondences, incenses, and detailed reports.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">📊</span>
+        <h3>Insightful Analytics</h3>
+        <p>Discover patterns in your draws, moods, and reflections. Visual analytics help you understand recurring themes and track your spiritual evolution.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">🤖</span>
+        <h3>AI-Powered Insights</h3>
+        <p>Receive personalized interpretations based on your reading history. Our AI analyzes your patterns to offer deeper understanding and guidance.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">📝</span>
+        <h3>Personal Journaling</h3>
+        <p>Capture thoughts, emotions, and experiences. Your journal becomes a mirror of your spiritual growth, helping you reflect on your journey over time.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">💭</span>
+        <h3>Emotion Tracking</h3>
+        <p>Log your emotional state and see how it aligns with the cards you draw. Custom emotion tagging helps you understand your inner landscape.</p>
+      </div>
+
+      <div class="feature-card">
+        <span class="feature-icon">☁️</span>
+        <h3>Cloud Sync</h3>
+        <p>Your data safely synced across devices. Sign in with email or Google to access your spiritual journey from anywhere, anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Data & Privacy Section -->
+  <section class="data-privacy" id="data-privacy">
+    <div class="privacy-container">
+      <h2 class="section-title">Your Data & Privacy</h2>
+      <p class="section-subtitle">Transparency in how we handle your information</p>
+
+      <div class="privacy-grid">
+        <div class="privacy-card">
+          <div class="privacy-icon">🔐</div>
+          <h3>What Data We Collect</h3>
+          <p>Mantica collects minimal personal data to provide you with a seamless experience:</p>
+          <ul>
+            <li><strong>Email Address:</strong> Used for account creation and authentication via Google Sign-In or email/password</li>
+            <li><strong>Display Name & Profile Photo:</strong> Retrieved from your Google account (if using Google Sign-In) to personalize your experience</li>
+            <li><strong>Tarot Readings & Journal Entries:</strong> Your daily card draws, emotions, notes, and spreads are stored to track your spiritual journey</li>
+            <li><strong>Usage Data:</strong> Anonymous analytics to improve app performance and features</li>
+          </ul>
+        </div>
+
+        <div class="privacy-card">
+          <div class="privacy-icon">✨</div>
+          <h3>Why We Need It</h3>
+          <p>We request access to your data for specific, transparent purposes:</p>
+          <ul>
+            <li><strong>Google Sign-In:</strong> To securely authenticate your account without storing passwords</li>
+            <li><strong>Cloud Sync:</strong> To backup and synchronize your readings across multiple devices</li>
+            <li><strong>Personalization:</strong> To display your name and provide a customized experience</li>
+            <li><strong>AI Insights:</strong> To analyze your reading patterns and provide personalized spiritual guidance</li>
+          </ul>
+        </div>
+
+        <div class="privacy-card">
+          <div class="privacy-icon">🛡️</div>
+          <h3>How We Protect It</h3>
+          <p>Your privacy and security are our top priorities:</p>
+          <ul>
+            <li><strong>Secure Storage:</strong> All data encrypted using Firebase Authentication and Cloud Firestore</li>
+            <li><strong>Private by Default:</strong> Your readings and journal entries are visible only to you</li>
+            <li><strong>No Third-Party Sharing:</strong> We never sell or share your personal information with advertisers</li>
+            <li><strong>User Control:</strong> Delete your data anytime from within the app settings</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="privacy-cta">
+        <p>For complete details on our data practices, please read our comprehensive <a href="privacy.html" class="privacy-link">Privacy Policy</a></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Section -->
+  <section class="download-section" id="download">
+    <h2>Begin Your Journey Today</h2>
+    <p>Download Mantica and start exploring your inner world - one card, one insight, one spread at a time.</p>
+
+    <div class="store-buttons">
+      <a href="#" class="store-btn">
+        <span class="store-icon">🍎</span>
+        <div class="store-text">
+          <small>Download on the</small>
+          <strong>App Store</strong>
+        </div>
+      </a>
+      <a href="#" class="store-btn">
+        <span class="store-icon">▶️</span>
+        <div class="store-text">
+          <small>Get it on</small>
+          <strong>Google Play</strong>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Mantica</h3>
+        <p>Your daily companion for tarot wisdom, cosmic guidance, and spiritual growth.</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#features">Features</a>
+        <a href="#data-privacy">Data & Privacy</a>
+        <a href="#download">Download</a>
+        <a href="privacy.html">Full Privacy Policy</a>
+      </div>
+
+      <div class="footer-section">
+        <h3>Developer</h3>
+        <p>Klyment Shchukin</p>
+        <p>ФОП ЩУКІН К. М.</p>
+        <p>D-U-N-S No: 53-840-7715</p>
+        <p>Poltava, Ukraine</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <a href="mailto:esotericpoltava@gmail.com">esotericpoltava@gmail.com</a>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2024 Mantica. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Carousel auto-scroll
+    const carousel = document.getElementById('carousel');
+    let scrollAmount = 0;
+    let autoScrollInterval;
+
+    function autoScroll() {
+      if (carousel) {
+        const items = carousel.querySelectorAll('.carousel-item');
+        let currentIndex = 0;
+
+        // Find which item is currently centered
+        for (let i = 0; i < items.length; i++) {
+          const rect = items[i].getBoundingClientRect();
+          const carouselRect = carousel.getBoundingClientRect();
+          if (rect.left >= carouselRect.left && rect.left < carouselRect.right) {
+            currentIndex = i;
+            break;
+          }
+        }
+
+        // Move to next item
+        currentIndex = (currentIndex + 1) % items.length;
+        const nextItem = items[currentIndex];
+
+        if (nextItem) {
+          nextItem.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'center'
+          });
+        }
+      }
+    }
+
+    // Auto-scroll every 4 seconds
+    autoScrollInterval = setInterval(autoScroll, 4000);
+
+    // Pause auto-scroll on hover
+    if (carousel) {
+      carousel.addEventListener('mouseenter', () => {
+        clearInterval(autoScrollInterval);
+      });
+
+      carousel.addEventListener('mouseleave', () => {
+        autoScrollInterval = setInterval(autoScroll, 4000);
+      });
+    }
+  </script>
 </body>
 </html>
